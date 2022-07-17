@@ -1,11 +1,12 @@
 import axios from "axios";
-class Info {
+import { User } from "../models/User";
+export class Info {
   static hostUrl = "https://jsonplaceholder.typicode.com/";
-  static user = new User();
+  static user = null;
 }
 
-class Request {
-  static  async  getData(type) {
+export class RequestData {
+  static  async  getData({type}) {
    return  await axios.get(Info.hostUrl + type);
   }
 }

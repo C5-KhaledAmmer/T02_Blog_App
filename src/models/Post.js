@@ -1,5 +1,5 @@
-class Post {
-    constructor(id,userId,title,body){
+export class Post {
+    constructor({id,userId,title,body}){
         this.id = id;
         this.userId = userId;
         this.title= title;
@@ -10,5 +10,3 @@ class Post {
 }
 
 
-/// post == user Id 
-/// comment  post Id + 
