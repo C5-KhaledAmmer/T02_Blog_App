@@ -6,15 +6,16 @@ import { Post } from "./models/Post";
 const App = () => {
   useEffect(() => {
     (async () => {
-      let users = await RequestData.getData({ type: "users" });
-      let comments = await RequestData.getData({ type: "comments" });
-      let posts = await RequestData.getData({ type: "posts" });
-      posts = posts.data.map((post) => {
+      let users =( await RequestData.getData({ type: "users" })).data;
+      let comments = (await RequestData.getData({ type: "comments" })).data;
+      let posts = (await RequestData.getData({ type: "posts" })).data;
+      let albums = (await RequestData.getData({ type: "albums" })).data;
+      posts = posts.map((post) => {
         const newPost = new Post({ ...post });
-        newPost.author = users.data.filter((user) => {
+        newPost.author = users.filter((user) => {
           return user.id === newPost.userId;
         });
-        newPost.comments = comments.data.filter((comment) => {
+        newPost.comments = comments.filter((comment) => {
           return newPost.id === comment.postId;
         }).map((comment)=>{
           return new Comment({...comment});
