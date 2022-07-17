@@ -2,7 +2,8 @@ import { useEffect } from "react";
 import "./App.css";
 import { RequestData } from "./controllers/AppInfo";
 import { Post } from "./models/Post";
-
+import {Route,Routes} from "react-router-dom"
+import { Login } from "./components/Login";
 const App = () => {
   useEffect(() => {
     (async () => {
@@ -27,7 +28,9 @@ const App = () => {
   }, []);
   return (
     <div className="App">
-      <p>Hello From App</p>
+      <Routes>
+      <Route path= "/"element={<Login/>}/>
+      </Routes>
     </div>
   );
 };

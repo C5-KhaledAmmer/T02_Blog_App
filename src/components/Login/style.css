@@ -1,0 +1,22 @@
+.form-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: rgb(4, 94, 76);
+  width: 100vw;
+}
+
+.form-div form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    text-align: start;
+    background-color: white;
+    min-width: 500px;
+    max-width: 500px;
+    padding: 10px;
+    box-shadow: 1px 1px 11px 1px red;
+    gap: 10px;
+}
