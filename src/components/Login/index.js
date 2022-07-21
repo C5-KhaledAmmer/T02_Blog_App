@@ -1,41 +1,57 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import "./style.css";
+import { useSelector } from "react-redux";
 export const Login = () => {
+  const form = useRef();
+  const { userReducer } = useSelector((state) => {
+    return state;
+  });
+
+  let[errors, setErrors] = useState([]);
+  const login = (e) => {
+    e.preventDefault();
+    errors = [];
+    const [email, password] = [form.current[0].value, form.current[1].value];
+    const user = userReducer.users.filter((user) => {
+      return user.email.toLowerCase() == email.toLowerCase();
+    });
+    if (user.length) {
+      console.log(password, user);
+      if (user[0].username === password) {
+      } else {
+        setErrors([...errors,"Wrong Password"])
+      }
+    }else{
+      setErrors([...errors,"Invalid Email"])
+    }
+  };
   return (
     <div className="form-div">
-      <form>
+      <form onSubmit={login} ref={form}>
         <h3>Login</h3>
-        <div class="form-group">
-          <label for="exampleInputEmail1">Email address</label>
+        <div className="form-group">
+          <label>Email address</label>
           <input
             type="email"
-            class="form-control"
+            className="form-control"
             id="exampleInputEmail1"
-            aria-describedby="emailHelp"
             placeholder="Enter email"
           />
-          <small id="emailHelp" class="form-text text-muted">
-            We'll never share your email with anyone else.
-          </small>
         </div>
-        <div class="form-group">
-          <label for="exampleInputPassword1">Password</label>
+        <div className="form-group">
+          <label>Password</label>
           <input
             type="password"
-            class="form-control"
-            id="exampleInputPassword1"
+            className="form-control"
             placeholder="Password"
           />
         </div>
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-          <label class="form-check-label" for="exampleCheck1">
-            Check me out
-          </label>
+        <div>
+          {errors.map((error) => {
+            return <small>{error}</small>;
+          })}
         </div>
-        <button type="submit" class="btn btn-primary">
-          Submit
-        </button>
+        <input type="submit" className="btn btn-primary" value={"Login"} />
       </form>
     </div>
   );

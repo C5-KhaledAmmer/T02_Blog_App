@@ -1,9 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { postReducer } from "./reducers/post";
-
+import userReducer from "./reducers/user"
+import postReducer from "./reducers/post"
 
 export default configureStore({
-    reducer: {
-        postReducer:postReducer,
+    reducer:{
+        userReducer,
+        postReducer
     },
-  });
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+        serializableCheck: false
+      }),
+   
+})
