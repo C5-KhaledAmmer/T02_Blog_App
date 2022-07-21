@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import "./style.css";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 export const Login = () => {
   const form = useRef();
   const { userReducer } = useSelector((state) => {
@@ -8,6 +9,7 @@ export const Login = () => {
   });
 
   let[errors, setErrors] = useState([]);
+  const nav = useNavigate()
   const login = (e) => {
     e.preventDefault();
     errors = [];
@@ -16,8 +18,9 @@ export const Login = () => {
       return user.email.toLowerCase() == email.toLowerCase();
     });
     if (user.length) {
-      console.log(password, user);
+      console.log(user[0]);
       if (user[0].username === password) {
+        nav("/home")
       } else {
         setErrors([...errors,"Wrong Password"])
       }

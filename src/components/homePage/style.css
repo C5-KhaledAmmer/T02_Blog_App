@@ -1,0 +1,14 @@
+.Cards-div{
+    display: grid;
+    grid-template-columns: repeat(2,auto);
+    gap: 5px;
+    margin-top: 2px;
+    background: linear-gradient(
+        rgb(19, 12, 12),
+        black
+    
+    );
+}
+.Cards-div .card-img-top{
+    width: 150px;
+}

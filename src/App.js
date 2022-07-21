@@ -8,6 +8,7 @@ import {useSelector,useDispatch} from "react-redux"
 import { setUsers } from "./redux/reducers/user";
 import { setPosts } from "./redux/reducers/post";
 import { User } from "./models/User";
+import { HomePage } from "./components/homePage";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -57,6 +58,7 @@ const App = () => {
     <div className="App">
       <Routes>
       <Route path= "/"element={<Login/>}/>
+      <Route path="/home" element={<HomePage/>}/>
       </Routes>
     </div>
   );
