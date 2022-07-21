@@ -9,13 +9,10 @@ import { setUsers } from "./redux/reducers/user";
 import { setPosts } from "./redux/reducers/post";
 import { User } from "./models/User";
 import { HomePage } from "./components/homePage";
+import { Comment } from "./models/Comment";
 
 const App = () => {
   const dispatch = useDispatch();
-  const {userReducer,postReducer}= useSelector((state)=>{
-    
-    return state;
-  })
   
   useEffect(() => {
     (async () => {
@@ -32,11 +29,11 @@ const App = () => {
         newPost.comments = comments.filter((comment) => {
           return newPost.id === comment.postId;
         }).map((comment)=>{
-          return new Comment({...comment});
+         const newComment = new Comment({...comment});
+          return newComment ;
         });
         return newPost;
       });
-      // dispatch(setPosts(posts[0]))
      
       users = users.map((user)=>{
         const newUser = new User({...user})
@@ -49,8 +46,8 @@ const App = () => {
         return newUser;
       });
       dispatch(setUsers(users));
-      // dispatch(setUsers(users));
-        
+      dispatch(setPosts(posts))
+        console.log(posts);
        
     })();
   }, []);

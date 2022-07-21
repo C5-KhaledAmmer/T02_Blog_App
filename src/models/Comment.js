@@ -1,4 +1,4 @@
-export class Comments {
+export class Comment {
     constructor({id,postId,name,email,body}){
         this.id = id;
         this.name = name;
