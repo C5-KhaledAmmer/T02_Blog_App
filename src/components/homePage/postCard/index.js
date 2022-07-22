@@ -2,7 +2,7 @@ import React from "react";
 import { Card, Nav, Button } from "react-bootstrap";
 
 export const PostCard = ({ post }) => {
-  console.log(post);
+  
   const variant = "Dark";
   return (
     <Card

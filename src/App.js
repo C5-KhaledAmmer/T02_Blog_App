@@ -10,10 +10,13 @@ import { setPosts } from "./redux/reducers/post";
 import { User } from "./models/User";
 import { HomePage } from "./components/homePage";
 import { Comment } from "./models/Comment";
+import { BuildDialog } from "./components/dialog";
 
 const App = () => {
   const dispatch = useDispatch();
-  
+  const { appReducer } = useSelector((state) => {
+    return state;
+  });
   useEffect(() => {
     (async () => {
       let users =( await RequestData.getData({ type: "users" })).data;
@@ -53,6 +56,10 @@ const App = () => {
   }, []);
   return (
     <div className="App">
+      {
+      appReducer.showDialog? <BuildDialog/>:<></>
+      }
+      <BuildDialog/>
       <Routes>
       <Route path= "/"element={<Login/>}/>
       <Route path="/home" element={<HomePage/>}/>

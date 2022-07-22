@@ -3,7 +3,7 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { useSelector, useDispatch } from "react-redux/";
-import { setHomeContent } from "../../redux/reducers/appState";
+import { setHomeContent } from "../../redux/reducers/app";
 export const NavBar = () => {
   const dispatch = useDispatch();
   const { appReducer } = useSelector((state) => {
