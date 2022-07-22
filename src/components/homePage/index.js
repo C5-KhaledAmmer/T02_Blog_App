@@ -21,9 +21,9 @@ export const HomePage = () => {
       <NavBar />
       {appReducer.showDialog ? (
         appReducer.showDialog == 1 ? (
-          <BuildDialog action={"CreatePost"} />
+          <BuildDialog action={1} />
         ) : (
-          (appReducer.showDialog == 2 ?<BuildDialog action={"EditPost"} />:<DeleteDialog />)
+          (appReducer.showDialog == 2 ?<BuildDialog action={2} />:<DeleteDialog />)
         )
       ) : (
         <></>

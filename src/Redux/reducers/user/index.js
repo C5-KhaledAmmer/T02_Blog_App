@@ -3,7 +3,7 @@ export const userReducer =  createSlice({
     name:"user",
     initialState:{
         user:JSON.parse(localStorage.getItem("user")) || {},
-        users:localStorage.getItem("users") || []
+        users:JSON.parse(localStorage.getItem("users")) || []
     },
     reducers:{
         setUser : (state,action)=>{

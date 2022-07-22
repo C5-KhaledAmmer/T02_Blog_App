@@ -7,7 +7,8 @@ import { Post } from "../../../../models/Post";
 import { updateUser } from "../../../../redux/reducers/user";
 import { setPosts } from "../../../../redux/reducers/post";
 
-export const BuildDialog = (action) => {
+export const BuildDialog = ({action}) => {
+  
   const dispatch = useDispatch();
   const { appReducer, postReducer, userReducer } = useSelector((state) => {
     return state;

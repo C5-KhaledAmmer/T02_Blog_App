@@ -4,6 +4,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { useSelector, useDispatch } from "react-redux/";
 import { setHomeContent } from "../../redux/reducers/app";
+import { Link } from 'react-router-dom';
 export const NavBar = () => {
   const dispatch = useDispatch();
   const { userReducer } = useSelector((state) => {
@@ -20,7 +21,7 @@ export const NavBar = () => {
     <>
       <Navbar bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand href="#home">{userReducer.user.name}</Navbar.Brand>
+          <Nav.Link as={Link} to={`/home/${userReducer.user.name}`}>{userReducer.user.name}</Nav.Link>
           <Nav className="me-auto">
             <Nav.Link
               onClick={() => {

@@ -1,6 +1,6 @@
 .Cards-div{
     display: grid;
-    grid-template-columns: repeat(2,auto);
+    grid-template-columns: repeat(3,auto);
     gap: 5px;
     margin-top: 2px;
    
@@ -9,3 +9,12 @@
     width: 150px;
 }
 
+@media all  and (max-width:1000px) {
+    .Cards-div{
+        display: grid;
+        grid-template-columns: repeat(2,auto);
+        gap: 5px;
+        margin-top: 2px;
+       
+    }
+}

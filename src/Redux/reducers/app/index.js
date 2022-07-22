@@ -4,6 +4,7 @@ export const appReducer = createSlice({
   initialState: {
     //* homeContent:0 --> show posts otherwise show Users
     homeContent: 0,
+   
     showDialog: false,
   },
   reducers: {
@@ -14,6 +15,7 @@ export const appReducer = createSlice({
       state.showDialog = action.payload;
 
     },
+    
   },
 });
 export const { setHomeContent,setShowDialog } = appReducer.actions;
