@@ -2,11 +2,13 @@ import { Button, Modal, Card } from "react-bootstrap";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import "./style.css";
-import { setShowDialog } from "../../redux/reducers/app";
-import { Post } from "../../models/Post";
-import { updateUser } from "../../redux/reducers/user";
-import { setPosts } from "../../redux/reducers/post";
-export const BuildDialog = () => {
+import { setShowDialog } from "../../../../redux/reducers/app";
+import { Post } from "../../../../models/Post";
+import { updateUser } from "../../../../redux/reducers/user";
+import { setPosts } from "../../../../redux/reducers/post";
+
+
+export const BuildDialog = (action) => {
   const dispatch = useDispatch();
   const [text, setText] = useState("");
   const [title, setTitle] = useState("");
@@ -15,6 +17,7 @@ export const BuildDialog = () => {
     return state;
   });
   const [show, setShow] = useState(appReducer.showDialog);
+  
   const onChange = (e) => {
     setText(e.target.value);
   };
@@ -28,7 +31,7 @@ export const BuildDialog = () => {
         body:text,
         title:title,
         userId: userReducer.user.id,
-         id : postReducer.posts.length +1
+        id : postReducer.posts.length +1
       });
       const user = userReducer.user;
       user.posts = [post,...user.posts];

@@ -1,4 +1,8 @@
-.img-div{
-    width: 100%;
-    display: flex;
+#post-botns {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+}
+#post-botns button {
+  width: 100%;
 }

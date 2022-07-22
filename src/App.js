@@ -10,7 +10,7 @@ import { setPosts } from "./redux/reducers/post";
 import { User } from "./models/User";
 import { HomePage } from "./components/homePage";
 import { Comment } from "./models/Comment";
-import { BuildDialog } from "./components/dialog";
+import { BuildDialog } from "./components/homePage/postCard/postdialog";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -56,10 +56,7 @@ const App = () => {
   }, []);
   return (
     <div className="App">
-      {
-      appReducer.showDialog? <BuildDialog/>:<></>
-      }
-      <BuildDialog/>
+      
       <Routes>
       <Route path= "/"element={<Login/>}/>
       <Route path="/home" element={<HomePage/>}/>

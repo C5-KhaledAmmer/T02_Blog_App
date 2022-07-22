@@ -1,8 +1,10 @@
 import React from "react";
-import { Card, Nav, Button } from "react-bootstrap";
-
+import { Card, Nav, Button, Container } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { BuildDialog } from "./postdialog";
+import "./style.css"
 export const PostCard = ({ post }) => {
-  
+ 
   const variant = "Dark";
   return (
     <Card
@@ -12,22 +14,13 @@ export const PostCard = ({ post }) => {
       className="mb-2"
     >
       <Card.Header>
-        <Nav variant="pills" defaultActiveKey="#first">
-          
-          <div style={{display:"flex",justifyContent:"space-around",width:"100%"}}>
-        
-          <Nav.Item>
-            <Nav.Link href="#first">Edit</Nav.Link>
-          </Nav.Item>
-          
-          <Nav.Item>
-            <Nav.Link href="#first">Delete</Nav.Link>
-          </Nav.Item>
-          
+      
+        <Container>
+          <div id ="post-botns">
+          <Button  type="button" className="btn btn-success" onClick={()=>{showDialog("edit")}}>Edit</Button>
+          <Button type="button" className="btn btn-danger"onClick={()=>{showDialog("delete")}}>Delete</Button>
           </div>
-          
-          
-        </Nav>
+        </Container>
       </Card.Header>
       <Card.Body>
         <Card.Title>{post.title}</Card.Title>

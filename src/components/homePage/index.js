@@ -5,21 +5,28 @@ import { UserCard } from "./userCard";
 import "./style.css";
 import { PostCard } from "./postCard";
 import { Button } from "react-bootstrap";
-import { setShowDialog} from "../../redux/reducers/app";
+import { setShowDialog } from "../../redux/reducers/app";
+import { BuildDialog } from "./postCard/postdialog";
 export const HomePage = () => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const { userReducer, postReducer, appReducer } = useSelector((state) => {
     return state;
   });
- const showDialog = ()=>{
-    console.log(appReducer.showDialog);
-
-    dispatch(setShowDialog(true))
-    console.log(appReducer.showDialog);
- }
+  const showDialog = () => {
+    dispatch(setShowDialog(1));
+  };
   return (
     <div>
       <NavBar />
+      {appReducer.showDialog ? (
+        appReducer.showDialog == 1 ? (
+          <BuildDialog action={"CreatePost"} />
+        ) : (
+          <BuildDialog action={"EditPost"} />
+        )
+      ) : (
+        <></>
+      )}
       <div>
         {appReducer.homeContent == 1 ? (
           <div className="Cards-div">
@@ -28,8 +35,12 @@ export const HomePage = () => {
             })}
           </div>
         ) : (
-          <div style={{display:"flex",flexDirection:"column", margin:"10px"}}>
-           <Button onClick={showDialog} variant="success">Add Post</Button> 
+          <div
+            style={{ display: "flex", flexDirection: "column", margin: "10px" }}
+          >
+            <Button onClick={showDialog} variant="success">
+              Add Post
+            </Button>
             <div className="Cards-div">
               {postReducer.posts.map((post) => {
                 return <PostCard post={post} />;
