@@ -42,8 +42,8 @@ export const HomePage = () => {
               Add Post
             </Button>
             <div className="Cards-div">
-              {postReducer.posts.map((post) => {
-                return <PostCard post={post} />;
+              {postReducer.posts.map((post,index) => {
+                return <PostCard post={post} index={index} />;
               })}
             </div>
           </div>

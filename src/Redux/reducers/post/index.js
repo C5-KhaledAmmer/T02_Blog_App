@@ -3,7 +3,7 @@ export const postReducer =  createSlice({
     name:"post",
     initialState:{
         currentPost :{
-            post:"",
+            post:{body:"",title:""},
             index:""
         },
         posts:[],

@@ -7,17 +7,16 @@ import { Post } from "../../../../models/Post";
 import { updateUser } from "../../../../redux/reducers/user";
 import { setPosts } from "../../../../redux/reducers/post";
 
-
 export const BuildDialog = (action) => {
   const dispatch = useDispatch();
-  const [text, setText] = useState("");
-  const [title, setTitle] = useState("");
-
   const { appReducer, postReducer, userReducer } = useSelector((state) => {
     return state;
   });
   const [show, setShow] = useState(appReducer.showDialog);
-  
+
+  const [text, setText] = useState(postReducer.currentPost.post.body);
+  const [title, setTitle] = useState(postReducer.currentPost.post.title);
+
   const onChange = (e) => {
     setText(e.target.value);
   };
@@ -28,18 +27,25 @@ export const BuildDialog = (action) => {
     return () => {
       dispatch(setShowDialog(false));
       const post = new Post({
-        body:text,
-        title:title,
+        body: text,
+        title: title,
         userId: userReducer.user.id,
-        id : postReducer.posts.length +1
+        id: postReducer.posts.length + 1,
       });
       const user = userReducer.user;
-      user.posts = [post,...user.posts];
+      user.posts = [post, ...user.posts];
       dispatch(updateUser(user));
-      const posts = [post,...postReducer.posts];
+      const posts = [post, ...postReducer.posts];
       dispatch(setPosts(posts));
     };
   };
+  const editPost = ()=>{
+    const current = postReducer.currentPost;
+    current.post.title = title;
+    current.post.body= text;
+    dispatch(setShowDialog(false));
+
+  }
   return (
     <Modal
       show={show}
@@ -65,20 +71,24 @@ export const BuildDialog = (action) => {
           className="post-title-area"
           placeholder="Title"
           onChange={onChangeTitle}
+          defaultValue={title}
         />
         <textarea
           placeholder="Write your post :)"
           className="post-text-area"
           onChange={onChange}
+          defaultValue={text}
         ></textarea>
       </Modal.Body>
 
       <Button
         variant={text && title ? "success" : "secondary"}
         disabled={!text || !title ? true : false}
-        onClick={createNewPost()}
+        onClick={() => {
+          action == 1 ? createNewPost() : editPost();
+        }}
       >
-        ADD POST
+        {action == 1 ? "ADD POST" : "Edit Post"}
       </Button>
     </Modal>
   );
