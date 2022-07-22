@@ -7,6 +7,7 @@ import { PostCard } from "./postCard";
 import { Button } from "react-bootstrap";
 import { setShowDialog } from "../../redux/reducers/app";
 import { BuildDialog } from "./postCard/postdialog";
+import { DeleteDialog } from "./postCard/deletedialog";
 export const HomePage = () => {
   const dispatch = useDispatch();
   const { userReducer, postReducer, appReducer } = useSelector((state) => {
@@ -22,7 +23,7 @@ export const HomePage = () => {
         appReducer.showDialog == 1 ? (
           <BuildDialog action={"CreatePost"} />
         ) : (
-          <BuildDialog action={"EditPost"} />
+          (appReducer.showDialog == 2 ?<BuildDialog action={"EditPost"} />:<DeleteDialog />)
         )
       ) : (
         <></>

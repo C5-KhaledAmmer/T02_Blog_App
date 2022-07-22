@@ -3,7 +3,6 @@ import { Card, Nav, Button, Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { setShowDialog } from "../../../redux/reducers/app";
 import { setCurrentPost } from "../../../redux/reducers/post";
-import { BuildDialog } from "./postdialog";
 import "./style.css"
 export const PostCard = ({ post,index }) => {
   const dispatch = useDispatch();
@@ -14,6 +13,8 @@ export const PostCard = ({ post,index }) => {
   };
   const deletePost = () => {
     dispatch(setCurrentPost({ post, index }));
+    dispatch(setShowDialog(3));
+
   };
   return (
     <Card
