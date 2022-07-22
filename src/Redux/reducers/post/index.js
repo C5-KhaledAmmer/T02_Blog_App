@@ -6,7 +6,7 @@ export const postReducer =  createSlice({
             post:{body:"",title:""},
             index:""
         },
-        posts:[],
+        posts:localStorage.getItem("posts") || [],
     },
     reducers:{
     setPosts:(state,action)=>{

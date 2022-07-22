@@ -13,5 +13,16 @@ export class User {
         this.albums = [];
     }
 
-
+    static userFromJson(users,posts,albums){
+        return users.map((user)=>{
+            const newUser = new User({...user})
+            newUser.posts = posts.filter((post)=>{
+              return user.id == post.userId;
+            });
+            newUser.albums = albums.filter((album)=>{
+              return user.id == album.userId;
+            })
+            return newUser;
+          });
+    }
 }

@@ -12,7 +12,7 @@ export const Login = () => {
 
   let[errors, setErrors] = useState([]);
   const nav = useNavigate()
-  const login = (e) => {
+  const login = async (e) => {
     e.preventDefault();
     errors = [];
     const [email, password] = [form.current[0].value, form.current[1].value];
@@ -22,6 +22,7 @@ export const Login = () => {
     if (user.length) {
       if (user[0].username === password) {
         dispatch(setUser(user[0]))
+       await localStorage.setItem("user",JSON.stringify(user[0]))
         nav("/home")
       } else {
         setErrors([...errors,"Wrong Password"])

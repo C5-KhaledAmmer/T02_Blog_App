@@ -6,6 +6,9 @@ import { setCurrentPost } from "../../../redux/reducers/post";
 import "./style.css"
 export const PostCard = ({ post,index }) => {
   const dispatch = useDispatch();
+  const {userReducer} = useSelector((state)=>{
+    return state;
+  })
   const variant = "Dark";
   const EditPost = () => {
     dispatch(setCurrentPost({ post, index }));
@@ -26,10 +29,10 @@ export const PostCard = ({ post,index }) => {
       <Card.Header>
       
         <Container>
-          <div id ="post-botns">
+         {post.author.id == userReducer.user.id? <div id ="post-botns">
           <Button  type="button" className="btn btn-success" onClick={EditPost}>Edit</Button>
           <Button type="button" className="btn btn-danger"onClick={deletePost}>Delete</Button>
-          </div>
+          </div>:<></>}
         </Container>
       </Card.Header>
       <Card.Body>

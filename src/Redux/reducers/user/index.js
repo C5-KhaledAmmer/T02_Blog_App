@@ -2,8 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 export const userReducer =  createSlice({
     name:"user",
     initialState:{
-        user:null,
-        users:[]
+        user:JSON.parse(localStorage.getItem("user")) || {},
+        users:localStorage.getItem("users") || []
     },
     reducers:{
         setUser : (state,action)=>{

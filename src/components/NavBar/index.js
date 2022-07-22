@@ -20,7 +20,7 @@ export const NavBar = () => {
     <>
       <Navbar bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand href="#home">{"userReducer.user.name"}</Navbar.Brand>
+          <Navbar.Brand href="#home">{userReducer.user.name}</Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link
               onClick={() => {
