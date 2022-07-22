@@ -50,7 +50,7 @@ const App = () => {
       });
       dispatch(setUsers(users));
       dispatch(setPosts(posts))
-        console.log(posts);
+        console.log(users);
        
     })();
   }, []);

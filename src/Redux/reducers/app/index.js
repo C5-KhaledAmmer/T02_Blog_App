@@ -11,10 +11,7 @@ export const appReducer = createSlice({
       state.homeContent = action.payload;
     },
     setShowDialog: (state, action) => {
-      console.log(action.payload);
-      console.log(state.showDialog);
       state.showDialog = action.payload;
-      console.log(state.showDialog);
 
     },
   },

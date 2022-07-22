@@ -1,9 +1,11 @@
 import React, { useRef, useState } from "react";
 import "./style.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { setUser } from "../../redux/reducers/user";
 export const Login = () => {
   const form = useRef();
+  const dispatch = useDispatch()
   const { userReducer } = useSelector((state) => {
     return state;
   });
@@ -18,8 +20,8 @@ export const Login = () => {
       return user.email.toLowerCase() == email.toLowerCase();
     });
     if (user.length) {
-      console.log(user[0]);
       if (user[0].username === password) {
+        dispatch(setUser(user[0]))
         nav("/home")
       } else {
         setErrors([...errors,"Wrong Password"])
