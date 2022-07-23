@@ -24,6 +24,7 @@ export const NavBar = () => {
           <Nav.Link as={Link} to={`/home/${userReducer.user.name}`}>{userReducer.user.name}</Nav.Link>
           <Nav className="me-auto">
             <Nav.Link
+            as={Link} to={"/home"}
               onClick={() => {
                 display("Users");
               }}

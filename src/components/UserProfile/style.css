@@ -13,6 +13,7 @@
 }
 #inner-profile{
     width: 50%;
+    max-width: 400px;
 }
 #profile-div .card-img-top{
     width: 50%;
@@ -25,7 +26,13 @@ background-color: antiquewhite;
 .mb-2{
     position: relative;
 }
-
+#profile-div .mb-2{
+    position: relative;
+    height: fit-content;
+}
+#profile-div .mb-2 img{
+    max-width: 150px;
+}
 .close-btn{
     position: absolute;
     top:10px;
