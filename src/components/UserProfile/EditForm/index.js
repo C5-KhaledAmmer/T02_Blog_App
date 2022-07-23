@@ -1,17 +1,14 @@
 import { useRef, useState } from "react";
 import { Form, Modal, Button, Row, Col, Accordion } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import {User} from "../../../models/User"
+import { User } from "../../../models/User";
 import { updateUser } from "../../../redux/reducers/user";
 export const EditForm = ({ show, onHide, user }) => {
   const form = useRef();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [validated, setValidated] = useState(false);
-  const newUser= new User({...user,
-    address:{geo:{}},
-    company:{},
-  });
-console.log(user,newUser);
+  const newUser = new User({ ...user, address: { geo: {} }, company: {} });
+
   const handleSubmit = (event) => {
     event.preventDefault();
     if (event.currentTarget.checkValidity() === false) {
@@ -26,9 +23,8 @@ console.log(user,newUser);
     });
     setValidated(true);
   };
-  
-  const  updateUserInformation = async (input)=>{
-   
+
+  const updateUserInformation = async (input) => {
     switch (input.placeholder) {
       case "Email":
         newUser.email = input.value.toString();
@@ -76,14 +72,14 @@ console.log(user,newUser);
       default:
         break;
     }
-  await localStorage.setItem("user",JSON.stringify(newUser));
-   dispatch(updateUser(newUser))
-  }
+    await localStorage.setItem("user", JSON.stringify(newUser));
+    dispatch(updateUser(newUser));
+  };
 
   const createInput = ({ controlId, type, placeholder, defaultValue }) => {
     return (
       <Form.Group as={Col} className="mb-3" controlId={controlId}>
-        <Form.Label>{placeholder}</Form.Label>
+        <Form.Label style={{color:"black"}}>{placeholder}</Form.Label>
         <Form.Control
           type={type}
           placeholder={placeholder}
@@ -117,8 +113,7 @@ console.log(user,newUser);
       </Accordion.Item>
     );
   };
-  
- 
+
   return (
     <Modal
       show={show}
@@ -126,6 +121,7 @@ console.log(user,newUser);
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
+      className="model-dialog"
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
@@ -275,14 +271,32 @@ console.log(user,newUser);
               ],
             })}
           </Accordion>
-          <Button variant="primary" type="submit">
-            Submit
-          </Button>
+          <br />
+
+          <Row>
+            <Col>
+              <Row style={{ margin: "2px" }}>
+                <Button variant="light" type="submit">
+                  Save
+                </Button>
+              </Row>
+            </Col>
+            <Col>
+              <Row style={{ margin: "2px" }}>
+                <Button
+                  variant="light"
+                  onClick={() => {
+                    onHide();
+                  }}
+                >
+                  Close
+                </Button>
+              </Row>
+            </Col>
+          </Row>
         </Form>
       </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={onHide}>Close</Button>
-      </Modal.Footer>
+  
     </Modal>
   );
 };
