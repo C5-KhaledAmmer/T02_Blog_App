@@ -1,11 +1,15 @@
 import { useRef, useState } from "react";
 import { Form, Modal, Button, Row, Col, Accordion } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { User } from "../../../models/User";
-import { updateUser } from "../../../redux/reducers/user";
+import { setUsers, updateUser } from "../../../redux/reducers/user";
 export const EditForm = ({ show, onHide, user }) => {
   const form = useRef();
   const dispatch = useDispatch();
+ const {userReducer} = useSelector((state)=>{
+  return state;
+ }) 
+
   const [validated, setValidated] = useState(false);
   const newUser = new User({ ...user, address: { geo: {} }, company: {} });
 
@@ -14,14 +18,18 @@ export const EditForm = ({ show, onHide, user }) => {
     if (event.currentTarget.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
+    }else{
+      [...form.current].map((input) => {
+        if (input.value) {
+          updateUserInformation(input);
+        }
+      });
+      onHide();
+      setValidated(true);
     }
 
-    [...form.current].map((input) => {
-      if (input.value) {
-        updateUserInformation(input);
-      }
-    });
-    setValidated(true);
+   
+   
   };
 
   const updateUserInformation = async (input) => {
@@ -73,6 +81,13 @@ export const EditForm = ({ show, onHide, user }) => {
         break;
     }
     await localStorage.setItem("user", JSON.stringify(newUser));
+    const users = [...userReducer.users];
+    users.forEach((user,index)=>{
+     if( user.id && newUser.id){
+      users[index] = newUser;
+     }
+    })
+    dispatch(setUsers(users));
     dispatch(updateUser(newUser));
   };
 
