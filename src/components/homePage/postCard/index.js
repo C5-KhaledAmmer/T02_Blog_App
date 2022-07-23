@@ -85,6 +85,7 @@ export const PostCard = ({ post, index }) => {
         </Row>
       </Card.Body>
       { postReducer.showComment && postReducer.currentPost.index === index ? (
+        post.comments.length?
         post.comments.map((comment) => {
           return (
             <div>
@@ -92,7 +93,7 @@ export const PostCard = ({ post, index }) => {
               <hr />
             </div>
           );
-        })
+        }):<h6>No Comment For This Post</h6>
       ) : (
         <></>
       )}

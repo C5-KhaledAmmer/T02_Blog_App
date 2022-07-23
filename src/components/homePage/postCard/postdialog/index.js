@@ -5,18 +5,18 @@ import "./style.css";
 import { setShowDialog } from "../../../../redux/reducers/app";
 import { Post } from "../../../../models/Post";
 import { updateUser } from "../../../../redux/reducers/user";
-import { setPosts } from "../../../../redux/reducers/post";
+import { setCurrentPost, setPosts } from "../../../../redux/reducers/post";
+import { User } from "../../../../models/User";
 
-export const BuildDialog = ({action}) => {
-  
+export const BuildDialog = ({ action }) => {
   const dispatch = useDispatch();
   const { appReducer, postReducer, userReducer } = useSelector((state) => {
     return state;
   });
   const [show, setShow] = useState(appReducer.showDialog);
 
-  const [text, setText] = useState(postReducer.currentPost.post.body);
-  const [title, setTitle] = useState(postReducer.currentPost.post.title);
+  const [text, setText] = useState( action!=1? postReducer.currentPost.post.body:"");
+  const [title, setTitle] = useState(action!=1?postReducer.currentPost.post.title:"");
 
   const onChange = (e) => {
     setText(e.target.value);
@@ -25,28 +25,31 @@ export const BuildDialog = ({action}) => {
     setTitle(e.target.value);
   };
   const createNewPost = () => {
-    return () => {
-      dispatch(setShowDialog(false));
-      const post = new Post({
-        body: text,
-        title: title,
-        userId: userReducer.user.id,
-        id: postReducer.posts.length + 1,
-      });
-      const user = userReducer.user;
-      user.posts = [post, ...user.posts];
-      dispatch(updateUser(user));
-      const posts = [post, ...postReducer.posts];
-      dispatch(setPosts(posts));
-    };
-  };
-  const editPost = ()=>{
-    const current = postReducer.currentPost;
-    current.post.title = title;
-    current.post.body= text;
     dispatch(setShowDialog(false));
-
-  }
+    const post = new Post({
+      body: text,
+      title: title,
+      userId: userReducer.user.id,
+      id: postReducer.posts.length + 1,
+      author:userReducer.user
+    });
+   const user = new User({ ...userReducer.user });
+    user.posts = [post, ...user.posts];
+    dispatch(updateUser(user));
+    const posts = [post, ...postReducer.posts];
+    dispatch(setPosts(posts));
+    localStorage.setItem("posts", JSON.stringify(posts));
+  };
+  const editPost = () => {
+    const current = new Post({ ...postReducer.currentPost.post });
+    current.title = title;
+    current.body = text;
+    const posts = [...postReducer.posts];
+    posts[postReducer.currentPost.index] = current;
+    dispatch(setPosts(posts));
+    dispatch(setShowDialog(false));
+    localStorage.setItem("posts", JSON.stringify(posts));
+  };
   return (
     <Modal
       show={show}
