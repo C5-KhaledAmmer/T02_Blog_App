@@ -50,7 +50,7 @@ export const NavBar = () => {
                 as={Link}
                 to={"/"}
                   onClick={() => {
-                    localStorage.clear();
+                    localStorage.setItem("user",JSON.stringify(null));
                   }}
                 >
                   SignOut

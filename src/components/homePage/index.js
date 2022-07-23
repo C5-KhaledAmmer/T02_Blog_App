@@ -31,9 +31,9 @@ export const HomePage = () => {
       <div>
         {appReducer.homeContent == 1 ? (
           <div className="Cards-div">
-            {userReducer.users.map((user) => {
+            {React.Children.toArray(userReducer.users.map((user) => {
               return <UserCard user={user} />;
-            })}
+            }))}
           </div>
         ) : (
           <div
@@ -43,9 +43,9 @@ export const HomePage = () => {
               Add Post
             </Button>
             <div className="Cards-div">
-              {postReducer.posts.map((post,index) => {
+              {React.Children.toArray(postReducer.posts.map((post,index) => {
                 return <PostCard post={post} index={index} />;
-              })}
+              }))}
             </div>
           </div>
         )}

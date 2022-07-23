@@ -20,7 +20,7 @@ export const PostCard = ({ post, index }) => {
     dispatch(setShowDialog(3));
   };
   const showComment = () => {
-    dispatch(setShowComment())
+    dispatch(setShowComment());
     dispatch(setCurrentPost({ post, index }));
   };
   return (
@@ -84,16 +84,19 @@ export const PostCard = ({ post, index }) => {
           </Button>
         </Row>
       </Card.Body>
-      { postReducer.showComment && postReducer.currentPost.index === index ? (
-        post.comments.length?
-        post.comments.map((comment) => {
-          return (
-            <div>
-              <small>{comment.body}</small>
-              <hr />
-            </div>
-          );
-        }):<h6>No Comment For This Post</h6>
+      {postReducer.showComment && postReducer.currentPost.index === index ? (
+        post.comments.length ? (
+          React.Children.toArray(post.comments.map((comment) => {
+            return (
+              <div>
+                <small>{comment.body}</small>
+                <hr />
+              </div>
+            );
+          }))
+        ) : (
+          <h6>No Comment For This Post</h6>
+        )
       ) : (
         <></>
       )}
