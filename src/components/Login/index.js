@@ -5,13 +5,13 @@ import { useNavigate } from "react-router-dom";
 import { setUser } from "../../redux/reducers/user";
 export const Login = () => {
   const form = useRef();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const { userReducer } = useSelector((state) => {
     return state;
   });
 
-  let[errors, setErrors] = useState([]);
-  const nav = useNavigate()
+  let [errors, setErrors] = useState([]);
+  const nav = useNavigate();
   const login = async (e) => {
     e.preventDefault();
     errors = [];
@@ -21,14 +21,14 @@ export const Login = () => {
     });
     if (user.length) {
       if (user[0].username === password) {
-        dispatch(setUser(user[0]))
-       await localStorage.setItem("user",JSON.stringify(user[0]))
-        nav("/home")
+        dispatch(setUser(user[0]));
+        await localStorage.setItem("user", JSON.stringify(user[0]));
+        nav("/home");
       } else {
-        setErrors([...errors,"Wrong Password"])
+        setErrors([...errors, "Wrong Password"]);
       }
-    }else{
-      setErrors([...errors,"Invalid Email"])
+    } else {
+      setErrors([...errors, "Invalid Email"]);
     }
   };
   return (
@@ -57,7 +57,7 @@ export const Login = () => {
             return <small>{error}</small>;
           })}
         </div>
-        <input type="submit" className="btn btn-primary" value={"Login"} />
+        <input type="submit" className="btn btn-light" value={"Login"} />
       </form>
     </div>
   );
