@@ -38,6 +38,8 @@ export const NavBar = () => {
                   Users
                 </Nav.Link>
                 <Nav.Link
+                as={Link}
+                to={"/home"}
                   onClick={() => {
                     display("Posts");
                   }}
