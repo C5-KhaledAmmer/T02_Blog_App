@@ -27,8 +27,6 @@ const App = () => {
         await storeData(posts,users);
       } else {
           nav("/home");
-        
-       
       }
     })();
   }, []);

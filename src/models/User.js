@@ -1,6 +1,6 @@
 export class User {
     
-    constructor({id,name,username,email,address,phone,website,company}){
+    constructor({id,name,username,email,address,phone,website,company,posts=[],albums=[]}){
         this.id = id;
         this.name = name;
         this.username =username;
@@ -9,8 +9,8 @@ export class User {
         this.phone =phone;
         this.website =website;
         this.company =company
-        this.posts = [];
-        this.albums = [];
+        this.posts = posts;
+        this.albums = albums;
     }
 
     static userFromJson(users,posts,albums){
