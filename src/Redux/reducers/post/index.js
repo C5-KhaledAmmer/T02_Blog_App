@@ -4,9 +4,10 @@ export const postReducer =  createSlice({
     initialState:{
         currentPost :{
             post:{body:"",title:""},
-            index:""
+            index:0
         },
         posts:JSON.parse(localStorage.getItem("posts")) || [],
+        showComment:false
     },
     reducers:{
     setPosts:(state,action)=>{
@@ -14,8 +15,11 @@ export const postReducer =  createSlice({
     },
     setCurrentPost:(state,action)=>{
         state.currentPost = action.payload
+    },
+    setShowComment:(state,action)=>{
+        state.showComment = !state.showComment
     }
     }
 });
-export const {setPosts,setCurrentPost} = postReducer.actions;
+export const {setPosts,setCurrentPost,setShowComment} = postReducer.actions;
 export default postReducer.reducer;

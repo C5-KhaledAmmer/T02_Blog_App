@@ -6,3 +6,11 @@
 #post-botns button {
   width: 100%;
 }
+
+#post-card-div{
+  background-color: black;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
